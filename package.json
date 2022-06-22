@@ -1,0 +1,25 @@
+{
+  "name": "reviews_api",
+  "version": "1.0.0",
+  "description": "api for interacting with reviews",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp35-sdc-neruda/reviews.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Tyler Nourse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp35-sdc-neruda/reviews/issues"
+  },
+  "homepage": "https://github.com/rpp35-sdc-neruda/reviews#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
