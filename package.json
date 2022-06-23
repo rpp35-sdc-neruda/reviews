@@ -4,7 +4,7 @@
   "description": "api for interacting with reviews",
   "main": "./server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./spec/test.js",
     "start": "nodemon ./server/index.js "
   },
   "repository": {
