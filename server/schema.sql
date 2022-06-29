@@ -4,20 +4,20 @@ CREATE DATABASE reviews_db;
 USE reviews_db;
 
 -- REVIEWS TABLE
-  -- id,
-  -- product_id,
-  -- rating,
-  -- date,
-  -- summary,
-  -- body,
-  -- recommend
-  -- reported,
-  -- reviewer_name,
-  -- reviewer_email,
-  -- response,
-  -- helpfulness
+  -- [X] id,
+  -- [X] product_id,
+  -- [X] rating,
+  -- [ ] date,
+  -- [X] summary,
+  -- [X] body,
+  -- [X] recommend
+  -- [X] reported,
+  -- [X] reviewer_name,
+  -- [X] reviewer_email,
+  -- [X] response,
+  -- [X] helpfulness
 CREATE TABLE reviews (
-  review_id int NOT NULL AUTO_INCREMENT,
+  id int NOT NULL AUTO_INCREMENT,
   product_id int NOT NULL,
   rating int NOT NULL,
   date int NOT NULL, -- auto create at time of entry
@@ -29,24 +29,31 @@ CREATE TABLE reviews (
   reviewer_email varchar(60),
   response varchar(1000),
   helpfulness int,
-  PRIMARY KEY (ID),
+  PRIMARY KEY (id)
 );
 
 -- PHOTOS TABLE
-  -- id,
-  -- review_id,
-  -- url
+  -- [X] id,
+  -- [X] review_id,
+  -- [X] url
 CREATE TABLE photos (
-
+  id int NOT NULL AUTO_INCREMENT,
+  review_id int NOT NULL,
+  url varchar(300),
+  PRIMARY KEY (id)
 );
 
 -- CHARACTERISTICS_REVIEWS TABLE
-  -- id,
-  -- characteristic_id,
-  -- review_id,
+  -- [X] id,
+  -- [X] characteristic_id,
+  -- [X] review_id,
   -- value
 CREATE TABLE characteristics_reviews (
-
+  id int NOT NULL AUTO_INCREMENT,
+  characteristic_id int NOT NULL,
+  review_id int NOT NULL,
+  value int NOT NULL,
+  PRIMARY KEY (id)
 );
 
 -- CHARACTERISTICS TABLE
@@ -54,29 +61,11 @@ CREATE TABLE characteristics_reviews (
   -- product_id,
   -- name
 CREATE TABLE characteristics (
-
+  id int NOT NULL AUTO_INCREMENT,
+  product_id int NOT NULL,
+  name varchar(12),
+  PRIMARY KEY (id)
 );
-
--- CREATE TABLE messages (
---   id int NOT NULL AUTO_INCREMENT,
---   text varchar(200) NOT NULL,
---   userID int NOT NULL,
---   roomID int NOT NULL,
---   PRIMARY KEY (ID)
--- );
-
--- CREATE TABLE users (
---   id int AUTO_INCREMENT,
---   username varchar(40) NOT NULL,
---   PRIMARY KEY (ID)
--- );
-
--- CREATE TABLE rooms (
---   id int NOT NULL AUTO_INCREMENT,
---   roomname varchar(40),
---   PRIMARY KEY (ID)
--- );
-
 
 /*  Execute this file from the command line by typing:
     mysql -u root < server/schema.sql
