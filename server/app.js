@@ -21,13 +21,13 @@ app.get('/', function (req, res) {
 app.get('/reviews', (req, res) => {
   const product_id = req.body.product_id;
   console.log('req.body.product_id', product_id);
-  //! get data from db using req.body.product_id
+  // get data from db using req.body.product_id
   models.reviews.get([product_id], (results) => {
-    //! send 'shaped' data back to client
+    //! reshape data for client
+    // send 'shaped' data back to client
     res.status(200).send(results);
   });
 
-  //! reshape data for client
 
 });
 
@@ -45,9 +45,16 @@ app.post('/reviews', (req, res) => {
 });
 
 //! PUT /reviews/:review_id/helpful -- mark review helpful by review_id/Response = Status: 204 NO CONTENT
-  // UPDATE reviews SET helpfulness=helpfulness+1 WHERE id = 1; -- WORKS!!!!
-app.put('/reviews/:review_id/helpful', (req, res) => {
-  res.status(204).send(req.params.review_id);
+app.put('/reviews/helpful', (req, res) => {
+  const review_id = req.body.review_id;
+  console.log('req.body.review_id', req.body.review_id);
+  console.log('review_id', review_id);
+
+  // update record in db
+  models.reviews.helpful([review_id], (results) => {
+    // send confirmation back to client
+    res.sendStatus(204);
+  });
 });
 
 //! PUT /reviews/:review_id/report -- report a review by review_id/Response = Status: 204 NO CONTENT
