@@ -11,24 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-
-
-app.get('/', function (req, res) {
-  res.send('Hello World')
-});
-
 // GET /reviews/ -- returns list of all reviews for given product/Response = Status: 200 OK
 app.get('/reviews', (req, res) => {
-  const product_id = req.body.product_id;
-  console.log('req.body.product_id', product_id);
-  // get data from db using req.body.product_id
-  models.reviews.get([product_id], (results) => {
+  models.reviews.get([req.body.product_id], (results) => {
     //! reshape data for client
     // send 'shaped' data back to client
     res.status(200).send(results);
   });
-
-
 });
 
 // GET /reviews/meta -- returns review metadata for a given product/Response = Status: 200 OK
@@ -46,12 +35,8 @@ app.post('/reviews', (req, res) => {
 
 //! PUT /reviews/:review_id/helpful -- mark review helpful by review_id/Response = Status: 204 NO CONTENT
 app.put('/reviews/helpful', (req, res) => {
-  const review_id = req.body.review_id;
-  console.log('req.body.review_id', req.body.review_id);
-  console.log('review_id', review_id);
-
   // update record in db
-  models.reviews.helpful([review_id], (results) => {
+  models.reviews.helpful([req.body.review_id], (results) => {
     // send confirmation back to client
     res.sendStatus(204);
   });
@@ -59,8 +44,13 @@ app.put('/reviews/helpful', (req, res) => {
 
 //! PUT /reviews/:review_id/report -- report a review by review_id/Response = Status: 204 NO CONTENT
   // UPDATE reviews SET reported=true WHERE id = req.body.review_id -- PROBABLY WORKS!!!!
-app.put('/reviews/:review_id/report', (req, res) => {
-  res.status(204).send(req.params.review_id);
+app.put('/reviews/report', (req, res) => {
+  console.log('[req.body.review_id]', [req.body.review_id]);
+  // update record in db
+  models.reviews.report([req.body.review_id], (results) => {
+    // send confirmation back to client
+    res.sendStatus(204);
+  })
 });
 
 app.listen(port);
