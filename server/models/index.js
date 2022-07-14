@@ -26,7 +26,7 @@ module.exports = {
     },
     report: (params, callback) => {
       const queryStr = 'UPDATE reviews SET reported=true WHERE id = ?;';
-      db.dbConnection.query(params, queryStr, (error, results) => {
+      db.dbConnection.query(queryStr, params, (error, results) => {
         if (error) {
           console.log('ERROR reporting review', error);
         } else {

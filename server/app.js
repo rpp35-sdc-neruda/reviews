@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const models = require('./models');
+const helperFunctions = require('./helperFunctions/index.js');
 
 const app = express();
 
@@ -14,13 +15,15 @@ app.use(cors());
 // GET /reviews/ -- returns list of all reviews for given product/Response = Status: 200 OK
 app.get('/reviews', (req, res) => {
   models.reviews.get([req.body.product_id], (results) => {
-    //! reshape data for client
+    // reshape data for client
+    let sortedResults = new helperFunctions.Reviews(results);
+    sortedResults.orgResults();
     // send 'shaped' data back to client
-    res.status(200).send(results);
+    res.status(200).send(sortedResults);
   });
 });
 
-// GET /reviews/meta -- returns review metadata for a given product/Response = Status: 200 OK
+//! GET /reviews/meta -- returns review metadata for a given product/Response = Status: 200 OK
 app.get('/reviews/meta', (req, res) => {
   //! add review data to reviews table
   //! add photo data to photos table
@@ -28,16 +31,14 @@ app.get('/reviews/meta', (req, res) => {
   res.status(200).send('Meta');
 });
 
-// POST /reviews -- adds a review for given product/Response = 201 CREATED
+//! POST /reviews -- adds a review for given product/Response = 201 CREATED
 app.post('/reviews', (req, res) => {
   res.status(201).send('Created');
 });
 
-//! PUT /reviews/:review_id/helpful -- mark review helpful by review_id/Response = Status: 204 NO CONTENT
+// PUT /reviews/:review_id/helpful -- mark review helpful by review_id/Response = Status: 204 NO CONTENT
 app.put('/reviews/helpful', (req, res) => {
-  // update record in db
   models.reviews.helpful([req.body.review_id], (results) => {
-    // send confirmation back to client
     res.sendStatus(204);
   });
 });

@@ -16,7 +16,7 @@ let Reviews = class {
       result.orgPhotos();
       this.results.push(result);
     });
-    //! delete/set unsortedResults to undefined to save space???
+    // delete unsortedResults to save space???
     delete this.unsortedResults;
   }
 };
@@ -36,7 +36,6 @@ let Review = class {
     this.urls = review.url;
   }
 
-  // this.urls = review.url.length ? review.url.split(',') : [];
   orgPhotos () {
     if (this.urls !== null) {
       let urls = this.urls.split(',');
@@ -44,14 +43,13 @@ let Review = class {
         this.photos.push({url: url, id: id})
       })
     }
-    //! delete/set urls to undefined to save space???
+    // delete urls to save space
     delete this.urls;
   }
 };
 
+const convertDate = (unformatedDate) => {
+  // do important stuff here....
+}
 
-// let Photos = class {
-//   constructor (url) {
-//     this.url
-//   }
-// }
+module.exports.Reviews = Reviews;
