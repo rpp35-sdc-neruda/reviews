@@ -3,7 +3,7 @@
 
 let Reviews = class {
   constructor (reviews) {
-    this.product = reviews[0].product_id;
+    this.product = reviews[0].product_id.toString();
     this.page = 0;
     this.count = reviews.length;
     this.unsortedResults = reviews;
@@ -12,11 +12,12 @@ let Reviews = class {
 
   orgResults () {
     this.unsortedResults.forEach((unsortedResult) => {
-      let result = new Review(unsortedResult);
-      result.orgPhotos();
-      this.results.push(result);
+      if (unsortedResult.reported !== 1) {
+        let result = new Review(unsortedResult);
+        result.orgPhotos();
+        this.results.push(result);
+      };
     });
-    // delete unsortedResults to save space???
     delete this.unsortedResults;
   }
 };
@@ -29,7 +30,7 @@ let Review = class {
     this.recommend = review.recommend;
     this.response = review.response;
     this.body = review.body;
-    this.date = review.date; //! convert date
+    this.date = this.convertDate(review.date);
     this.reviewer_name = review.reviewer_name;
     this.helpfulness = review.helpfulness;
     this.photos = [];
@@ -43,13 +44,14 @@ let Review = class {
         this.photos.push({url: url, id: id})
       })
     }
-    // delete urls to save space
     delete this.urls;
   }
-};
 
-const convertDate = (unformatedDate) => {
-  // do important stuff here....
-}
+  convertDate (isoDate) {
+    const dateStr = new Date(isoDate).toLocaleString().split(',')[0].split('/');
+    const date = new Date(dateStr);
+    return date.toISOString();
+  }
+};
 
 module.exports.Reviews = Reviews;

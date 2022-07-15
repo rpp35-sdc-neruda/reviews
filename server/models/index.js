@@ -5,7 +5,8 @@ module.exports = {
   reviews: {
     get: (params, callback) => {
       const queryStr = 'SELECT reviews.*, GROUP_CONCAT(url ORDER BY photos.id) AS url FROM reviews LEFT JOIN \
-                      photos ON reviews.id = photos.review_id WHERE product_id = ? GROUP BY reviews.id;';
+                      photos ON reviews.id = photos.review_id WHERE product_id = ? GROUP BY reviews.id ORDER BY helpfulness DESC;';
+
       db.dbConnection.query(queryStr, params, (error, results) => {
         if (error) {
           console.log('ERROR getting reviews by product_id', error);
@@ -33,10 +34,21 @@ module.exports = {
           callback(results);
         }
       });
-    }
-    // post: (callback) => {
+    },
+    post: (params, callback) => {
+      const queryStr = '';
 
-    // }
+      db.dbConnection.query(queryStr, params, (error, results) => {
+        if (error) {
+          console.log('ERROR posting review', error);
+        } else {
+          callback(results);
+        }
+      })
+    }
+    // meta: (params, callback) => {
+
+    //}
   }
 }
 
