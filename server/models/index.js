@@ -36,7 +36,8 @@ module.exports = {
       });
     },
     post: (params, callback) => {
-      const queryStr = '';
+      const queryStr = `INSERT INTO reviews(product_id, rating, date, summary, body, recommend, reported, reviewer_name, \
+                        reviewer_email, response, helpfulness) VALUES (?, ?, 2147483647, ?, ?, 0, 0, ?, ?, 'null', 0);`;
 
       db.dbConnection.query(queryStr, params, (error, results) => {
         if (error) {
