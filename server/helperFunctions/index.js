@@ -54,4 +54,15 @@ let Review = class {
   }
 };
 
+createPhotosQuery = (photos) => {
+  // (LAST_INSERT_ID(), ?)
+  let results = photos.map((url) => {
+   return `(LAST_INSERT_ID(), "${url}")`
+  })
+  // return string concat minus last digit
+  return results.join(',')
+}
+
 module.exports.Reviews = Reviews;
+module.exports.createPhotosQuery = createPhotosQuery;
+

@@ -35,13 +35,22 @@ module.exports = {
         }
       });
     },
-    post: (params, callback) => {
+    postReview: (params, callback) => {
       const queryStr = `INSERT INTO reviews(product_id, rating, date, summary, body, recommend, reported, reviewer_name, \
-                        reviewer_email, response, helpfulness) VALUES (?, ?, 2147483647, ?, ?, 0, 0, ?, ?, 'null', 0);`;
-
+                        reviewer_email, response, helpfulness) VALUES (?, ?, 2147483647, ?, ?, ?, 0, ?, ?, 'null', 0);`;
       db.dbConnection.query(queryStr, params, (error, results) => {
         if (error) {
           console.log('ERROR posting review', error);
+        } else {
+          callback(results);
+        }
+      })
+    },
+    postPhotos: (params, callback) => {
+      const queryStr = 'INSERT INTO photos(review_id, url) VALUES ?;';
+      db.dbConnection.query(queryStr,params, (error, results) => {
+        if (error) {
+          console.log('Error posting photos', error);
         } else {
           callback(results);
         }

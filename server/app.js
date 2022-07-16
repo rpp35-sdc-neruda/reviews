@@ -24,21 +24,24 @@ app.get('/reviews/meta', (req, res) => {
   res.status(200).send('Meta');
 });
 
-//! POST /reviews -- adds a review for given product/Response = 201 CREATED
 app.post('/reviews', (req, res) => {
-  //! add review data to reviews table
-  const params = [];
-  params.push(req.body.product_id);
-  params.push(req.body.rating);
-  params.push(req.body.summary);
-  params.push(req.body.body);
-  params.push(req.body.recomend);
-  params.push(req.body.name);
-  params.push(req.body.email);
+  console.log('req.body', req.body);
+  const params = [
+    req.body.product_id,
+    req.body.rating,
+    req.body.summary,
+    req.body.body,
+    req.body.recomend,
+    req.body.name,
+    req.body.email
+  ];
 
-  models.reviews.post(params, (results) => {
-    res.status(201).send('Created');
+  models.reviews.postReview(params, (results) => {
+    models.reviews.postPhotos(helperFunctions.createPhotosQuery(req.body.photos), (results) => {
+      res.status(201).send('Created');
+    })
   })
+
   //! add photo data to photos table
   //! add characteristics to characteristics table
 });
