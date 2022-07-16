@@ -21,7 +21,13 @@ app.get('/reviews', (req, res) => {
 
 //! GET /reviews/meta -- returns review metadata for a given product/Response = Status: 200 OK
 app.get('/reviews/meta', (req, res) => {
-  res.status(200).send('Meta');
+  models.reviews.metaRating([req.body.product_id], (metaRating) => {
+    console.log('metaRating', metaRating);
+    models.reviews.metaRecommend([req.body.product_id], (metaRecommend) => {
+      console.log('metaRecommend', metaRecommend);
+      res.status(200).send(metaRating.concat(metaRecommend));
+    });
+  })
 });
 
 app.post('/reviews', (req, res) => {
@@ -37,7 +43,8 @@ app.post('/reviews', (req, res) => {
   ];
 
   models.reviews.postReview(params, (results) => {
-    models.reviews.postPhotos(helperFunctions.createPhotosQuery(req.body.photos), (results) => {
+    // results.insertId === last inserted id****
+    models.reviews.postPhotos([helperFunctions.createPhotosQuery(req.body.photos)], (results) => {
       res.status(201).send('Created');
     })
   })

@@ -61,7 +61,7 @@ createPhotosQuery = (photos) => {
   })
   // return string concat minus last digit
   return results.join(',')
-}
+};
 
 module.exports.Reviews = Reviews;
 module.exports.createPhotosQuery = createPhotosQuery;

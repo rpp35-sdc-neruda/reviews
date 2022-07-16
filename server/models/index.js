@@ -48,13 +48,34 @@ module.exports = {
     },
     postPhotos: (params, callback) => {
       const queryStr = 'INSERT INTO photos(review_id, url) VALUES ?;';
-      db.dbConnection.query(queryStr,params, (error, results) => {
+      db.dbConnection.query(queryStr, params, (error, results) => {
         if (error) {
           console.log('Error posting photos', error);
         } else {
           callback(results);
         }
       })
+    },
+    metaRating: (params, callback) => {
+      const queryStr = 'SELECT rating,COUNT(1) as count FROM reviews WHERE product_id = ? GROUP BY rating ORDER BY rating ASC;'
+      db.dbConnection.query(queryStr, params, (error, results) => {
+        if (error) {
+          console.log('ERROR getting meta review data', error);
+        } else {
+          callback(results);
+        }
+      });
+    },
+    metaRecommend: (params, callback) => {
+      const queryStr = 'SELECT SUM(recommend) AS recommended FROM reviews WHERE product_id = ?;';
+      db.dbConnection.query(queryStr, params, (error, results) => {
+        if (error) {
+          console.log('ERROR geting meta recommendation data', error);
+        } else {
+          callback(results);
+        }
+      })
+
     }
     // meta: (params, callback) => {
 
