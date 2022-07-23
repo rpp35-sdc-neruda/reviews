@@ -56,6 +56,7 @@ module.exports = {
         }
       })
     },
+    // postCategories: (params, callback) => {},
     metaRating: (params, callback) => {
       const queryStr = 'SELECT rating,COUNT(1) as count FROM reviews WHERE product_id = ? GROUP BY rating ORDER BY rating ASC;'
       db.dbConnection.query(queryStr, params, (error, results) => {
@@ -77,9 +78,7 @@ module.exports = {
       })
 
     }
-    // meta: (params, callback) => {
-
-    //}
+    // metaCategories: (params, callback) => {}
   }
 }
 

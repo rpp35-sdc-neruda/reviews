@@ -54,7 +54,24 @@ let Review = class {
   }
 };
 
-createPhotosQuery = (photos) => {
+const Meta = class {
+  constructor(results) {
+    this.unsortedRatings = results.metaRating;
+    this.product_id = results.product_id;
+    this.recommend = {0: Number(results.metaRecommend.recommended)}
+    this.ratings = {};
+    this.characteristics = {};
+  }
+
+  orgRatings () {
+    this.unsortedRatings.forEach((rating) => {
+      this.ratings[rating.rating] = rating.count;
+    })
+  delete this.unsortedRatings;
+  }
+};
+
+createPhotosQuery = (photos, lastInsertID) => {
   // (LAST_INSERT_ID(), ?)
   let results = photos.map((url) => {
    return `(LAST_INSERT_ID(), "${url}")`
@@ -63,6 +80,6 @@ createPhotosQuery = (photos) => {
   return results.join(',')
 };
 
+module.exports.Meta = Meta;
 module.exports.Reviews = Reviews;
 module.exports.createPhotosQuery = createPhotosQuery;
-

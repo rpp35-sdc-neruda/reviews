@@ -12,26 +12,29 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/reviews', (req, res) => {
-  models.reviews.get([req.body.product_id], (results) => {
-    let sortedResults = new helperFunctions.Reviews(results);
-    sortedResults.orgResults();
-    res.status(200).send(sortedResults);
+  models.reviews.get([req.body.product_id], (unstortedResults) => {
+    let results = new helperFunctions.Reviews(unstortedResults);
+    results.orgResults();
+    res.status(200).send(results);
   });
 });
 
-//! GET /reviews/meta -- returns review metadata for a given product/Response = Status: 200 OK
+//! characteristics???
 app.get('/reviews/meta', (req, res) => {
   models.reviews.metaRating([req.body.product_id], (metaRating) => {
-    console.log('metaRating', metaRating);
     models.reviews.metaRecommend([req.body.product_id], (metaRecommend) => {
-      console.log('metaRecommend', metaRecommend);
-      res.status(200).send(metaRating.concat(metaRecommend));
+      let results = new helperFunctions.Meta({
+        product_id: req.body.product_id,
+        metaRating: metaRating,
+        metaRecommend: metaRecommend[0]
+      });
+      results.orgRatings()
+      res.status(200).send(results);
     });
   })
 });
 
 app.post('/reviews', (req, res) => {
-  console.log('req.body', req.body);
   const params = [
     req.body.product_id,
     req.body.rating,
@@ -44,13 +47,11 @@ app.post('/reviews', (req, res) => {
 
   models.reviews.postReview(params, (results) => {
     // results.insertId === last inserted id****
-    models.reviews.postPhotos([helperFunctions.createPhotosQuery(req.body.photos)], (results) => {
-      res.status(201).send('Created');
-    })
+    res.status(201).send('Created');
+    // add photo data to photos table
+    // models.reviews.postPhotos([helperFunctions.createPhotosQuery(req.body.photos)], (results) => {})
   })
-
-  //! add photo data to photos table
-  //! add characteristics to characteristics table
+  // add characteristics to characteristics table
 });
 
 app.put('/reviews/helpful', (req, res) => {
