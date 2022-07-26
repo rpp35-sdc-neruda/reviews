@@ -4,3 +4,4 @@
 .pem
 config.js
 /node_modules
+/config
