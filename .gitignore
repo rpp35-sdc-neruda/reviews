@@ -1,4 +1,6 @@
 /CSVs
 .env
+.cer
+.pem
 config.js
 /node_modules
