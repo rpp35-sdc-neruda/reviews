@@ -1,9 +1,11 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const models = require('./models');
 const helperFunctions = require('./helperFunctions/index.js');
+
 
 const app = express();
 
