@@ -2,8 +2,8 @@
 // create a class for each review result (individual packages)
 
 let Reviews = class {
-  constructor (reviews) {
-    this.product = reviews[0].product_id.toString();
+  constructor (reviews, product_id) {
+    this.product = product_id
     this.page = 0;
     this.count = reviews.length;
     this.unsortedResults = reviews;

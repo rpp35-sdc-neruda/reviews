@@ -1,30 +1,31 @@
-require('newrelic');
+// require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const models = require('./models');
 const helperFunctions = require('./helperFunctions/index.js');
-
+const path = require('path');
 
 const app = express();
-
+app.use(express.static(path.join(__dirname, '../public' )));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/reviews', (req, res) => {
-  models.reviews.get([req.body.product_id], (unstortedResults) => {
-    let results = new helperFunctions.Reviews(unstortedResults);
+  // console.log('req', req.query.product_id);
+  models.reviews.get([req.query.product_id], (unstortedResults) => {
+    let results = new helperFunctions.Reviews(unstortedResults, req.query.product_id);
     results.orgResults();
     res.status(200).send(results);
   });
 });
 
-//! characteristics???
 app.get('/reviews/meta', (req, res) => {
-  models.reviews.metaRating([req.body.product_id], (metaRating) => {
-    models.reviews.metaRecommend([req.body.product_id], (metaRecommend) => {
+  // console.log('req', req.query.product_id);
+  models.reviews.metaRating([req.query.product_id], (metaRating) => {
+    models.reviews.metaRecommend([req.query.product_id], (metaRecommend) => {
       let results = new helperFunctions.Meta({
         product_id: req.body.product_id,
         metaRating: metaRating,
