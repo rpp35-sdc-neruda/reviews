@@ -49,9 +49,9 @@ npm test
 
 ## K6 Testing:
 
-- ![SDC_ Reviews API3](https://user-images.githubusercontent.com/84835229/194171489-7656e487-5b0b-4c1c-b05b-440983517475.jpeg)
-- ![SDC_ Reviews API4](https://user-images.githubusercontent.com/84835229/194171590-38c2b5c2-0842-4598-b91f-65e34c4e8193.jpeg)
-- ![SDC_ Reviews API5](https://user-images.githubusercontent.com/84835229/194171634-0ab604d4-c860-448b-9494-4dc39480ce7c.jpeg)
+- post pm2 install + ulimit -n 4096 ![SDC_ Reviews API3](https://user-images.githubusercontent.com/84835229/194171489-7656e487-5b0b-4c1c-b05b-440983517475.jpeg)
+- 1500 RPS (post pm2 installation) ![SDC_ Reviews API4](https://user-images.githubusercontent.com/84835229/194171590-38c2b5c2-0842-4598-b91f-65e34c4e8193.jpeg)
+- 2500 RMS ![SDC_ Reviews API5](https://user-images.githubusercontent.com/84835229/194171634-0ab604d4-c860-448b-9494-4dc39480ce7c.jpeg)
 
 ## Loader.io Testing: 
 
