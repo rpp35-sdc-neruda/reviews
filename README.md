@@ -49,15 +49,15 @@ npm test
 
 ## K6 Testing:
 
-- post pm2 install + ulimit -n 4096 ![SDC_ Reviews API3](https://user-images.githubusercontent.com/84835229/194171489-7656e487-5b0b-4c1c-b05b-440983517475.jpeg)
-- 1500 RPS (post pm2 installation) ![SDC_ Reviews API4](https://user-images.githubusercontent.com/84835229/194171590-38c2b5c2-0842-4598-b91f-65e34c4e8193.jpeg)
-- 2500 RMS ![SDC_ Reviews API5](https://user-images.githubusercontent.com/84835229/194171634-0ab604d4-c860-448b-9494-4dc39480ce7c.jpeg)
+- 1000 RPS (post pm2 install + ulimit -n 4096): ![SDC_ Reviews API3](https://user-images.githubusercontent.com/84835229/194171489-7656e487-5b0b-4c1c-b05b-440983517475.jpeg)
+- 1500 RPS (post pm2 installation): ![SDC_ Reviews API4](https://user-images.githubusercontent.com/84835229/194171590-38c2b5c2-0842-4598-b91f-65e34c4e8193.jpeg)
+- 2500 RMS: ![SDC_ Reviews API5](https://user-images.githubusercontent.com/84835229/194171634-0ab604d4-c860-448b-9494-4dc39480ce7c.jpeg)
 
 ## Loader.io Testing: 
 
-- ![SDC_ Reviews API8](https://user-images.githubusercontent.com/84835229/194171901-435ce8c5-906a-4ca6-a918-97910e912a5a.jpeg)
-- ![SDC_ Reviews API9](https://user-images.githubusercontent.com/84835229/194171961-a9ef76f1-5126-4cee-8fb9-4c779ae136dd.jpeg)
-- ![SDC_ Reviews API10](https://user-images.githubusercontent.com/84835229/194172042-db2e2c1c-54f8-4a83-b672-433a2d243cab.jpeg)
-- ![SDC_ Reviews API11](https://user-images.githubusercontent.com/84835229/194172080-0c508fbb-9fd3-4643-b2c6-e782398832ad.jpeg)
-- ![SDC_ Reviews API12](https://user-images.githubusercontent.com/84835229/194172119-1e978174-f51d-4398-a2c6-32529773a7a2.jpeg)
-- ![SDC_ Reviews API13](https://user-images.githubusercontent.com/84835229/194172157-42ab1605-d93e-4a7a-83a9-49fc2b8d2d57.jpeg)
+- 900 Clients per second: ![SDC_ Reviews API8](https://user-images.githubusercontent.com/84835229/194171901-435ce8c5-906a-4ca6-a918-97910e912a5a.jpeg)
+- 1700 Clients over 1 minute: ![SDC_ Reviews API9](https://user-images.githubusercontent.com/84835229/194171961-a9ef76f1-5126-4cee-8fb9-4c779ae136dd.jpeg)
+- 700 Clients per second: ![SDC_ Reviews API10](https://user-images.githubusercontent.com/84835229/194172042-db2e2c1c-54f8-4a83-b672-433a2d243cab.jpeg)
+- 1350 Clients over 1 minute: ![SDC_ Reviews API11](https://user-images.githubusercontent.com/84835229/194172080-0c508fbb-9fd3-4643-b2c6-e782398832ad.jpeg)
+- 8000 Clients per second: ![SDC_ Reviews API12](https://user-images.githubusercontent.com/84835229/194172119-1e978174-f51d-4398-a2c6-32529773a7a2.jpeg)
+- 1000 clients over 1 minute: ![SDC_ Reviews API13](https://user-images.githubusercontent.com/84835229/194172157-42ab1605-d93e-4a7a-83a9-49fc2b8d2d57.jpeg)
